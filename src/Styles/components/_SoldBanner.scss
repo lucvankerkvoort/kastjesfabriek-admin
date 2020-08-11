@@ -1,0 +1,12 @@
+.banner {
+  position: absolute;
+  top: 50%;
+
+  h2 {
+    width: 100%;
+    padding: 10px;
+    z-index: 1;
+    background: red;
+    color: white;
+  }
+}

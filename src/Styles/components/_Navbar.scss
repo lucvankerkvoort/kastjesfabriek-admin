@@ -1,0 +1,40 @@
+.navbar {
+  border-bottom: 1px solid gray;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  .logo {
+    width: 15%;
+    display: flex;
+    // border: 2px solid black;
+    justify-content: center;
+    font-family: "Kalam";
+    font-size: 0.7em;
+  }
+  .navbar-items {
+    width: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    // border: 2px solid black;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .navbar {
+    width: 100%;
+    .logo {
+      width: 10%;
+      font-size: 1em;
+    }
+    .navbar-items {
+      width: 40%;
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

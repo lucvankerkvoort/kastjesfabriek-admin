@@ -1,0 +1,29 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 90vh;
+  // border: 2px solid black;
+  margin: auto;
+  p {
+    margin: 0px auto;
+    padding: 15px;
+    // box-shadow: 2px 3px 4px gray;
+    text-shadow: 1px 1px;
+  }
+  img {
+    width: 512px;
+    height: 512px;
+    margin: auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    input {
+      border-radius: 5px;
+      margin: 10px 30px;
+      padding: 5px 2px;
+      border-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}

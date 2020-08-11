@@ -1,0 +1,33 @@
+.gallery {
+  width: 650px;
+  //   border: 2px solid black;
+  max-height: 600px;
+  padding: 0px 50px;
+  z-index: 1;
+  .picture {
+    height: 250px;
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .gallery {
+    width: 650px;
+    //   border: 2px solid black;
+    max-height: 600px;
+    padding: 0px 50px;
+    z-index: 1;
+    .picture {
+      height: 600px;
+      width: 550px;
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
