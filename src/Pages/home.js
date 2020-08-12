@@ -1,11 +1,13 @@
-import React from "react";
-import Jumbotron from "../Components/Jumbotron/jumbotron";
-import Images from "../Images/images";
+import React, { useContext } from "react";
+import Items from "../Components/Items/item";
 import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
 import Collection from "../Components/Collections/collections";
+import { store } from "../Services/Store";
 
 const Home = ({ collections }) => {
+  const userData = useContext(store);
+  const { info } = userData.state;
   const collectionsArray = () => {
     const obj = {};
     for (let i = 0; i < collections.length; i++) {
@@ -15,13 +17,22 @@ const Home = ({ collections }) => {
   };
   return (
     <div className="home">
-      <Jumbotron
-        title="Kastjes Fabriek"
-        backgroundPicture={Images.jumbotronBackground}
-        text="Vind je het ook zo zonde dat er zoveel spullen afgedankt worden? Ik ook! Daarom ben ik begonnen met de Kastjes Fabriek om oude meubels een tweede kans te geven. Met liefde knap ik alles op tot echte pareltjes! Kijk snel wat er allemaal te koop is."
-      />
       <Title title="Collecties" />
       <Collection title={collectionsArray()} collections={collections} />
+      <Title title="Producten" />
+      <div className="shop">
+        {(info || []).map((item, i) => {
+          return (
+            <Items
+              key={i}
+              title={item.title}
+              description={item.description}
+              pics={item.images}
+              price={item.price}
+            />
+          );
+        })}
+      </div>
       <Footer />
     </div>
   );

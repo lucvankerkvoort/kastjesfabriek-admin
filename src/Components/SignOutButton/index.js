@@ -12,7 +12,7 @@ const SignOutButton = ({ firebase }) => {
       onClick={() => {
         firebase
           .doSignOut()
-          .then(() => localStorage.setItem("authUser", null))
+          .then(() => localStorage.setItem("authUser", ""))
           .then(() => dispatch({ type: "authed", payload: false }));
 
         // const execute = new Promise(() => firebase.doSignOut());

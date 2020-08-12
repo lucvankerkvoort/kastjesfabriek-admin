@@ -6,6 +6,7 @@ import SoldBanner from "../SoldBanner/soldBanner";
 
 const Items = ({ title, price, pics, sold, description }) => {
   const [user, setUser] = useState("");
+  const [edit, setEdit] = useState(false);
   const userData = useContext(store);
   const { dispatch } = userData;
   const props = {
@@ -39,14 +40,19 @@ const Items = ({ title, price, pics, sold, description }) => {
           />
         </div>
       </Link>
-      <div className="item-title">
-        <h1>{title}</h1>
-      </div>
+
       {sold ? <SoldBanner /> : null}
-      <div className="price">
-        <p>€{price},00</p>
-      </div>
-      {user !== "null" ? (
+      {!edit ? (
+        <>
+          <div className="item-title">
+            <h1>{title}</h1>
+          </div>
+          <div className="price">
+            <p>€{price},00</p>
+          </div>
+        </>
+      ) : null}
+      {user !== "" ? (
         <div
           className="remove"
           onClick={() =>

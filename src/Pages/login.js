@@ -37,7 +37,7 @@ class SignInFormBase extends Component {
       })
       .then(() => {
         dispatch({ type: "authed", payload: true });
-        this.props.history.push("/");
+        this.props.history.push("/home");
         console.log(localStorage.getItem("authUser"));
       })
       .catch((error) => {
