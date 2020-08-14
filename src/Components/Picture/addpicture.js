@@ -46,11 +46,8 @@ const AddPicture = () => {
             dispatch({
               type: "images",
               payload: userData.state.images
-                ? [
-                    ...userData.state.images,
-                    { image: fireBaseUrl, file: imageAsFile.name },
-                  ]
-                : [{ image: fireBaseUrl, file: imageAsFile.name }],
+                ? [...userData.state.images, fireBaseUrl]
+                : [fireBaseUrl],
             });
           });
       }

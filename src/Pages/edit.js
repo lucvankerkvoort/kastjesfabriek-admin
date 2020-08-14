@@ -2,90 +2,103 @@ import React, { useContext, useState } from "react";
 import AddPicture from "../Components/Picture/addpicture";
 import { store } from "../Services/Store";
 import { db } from "../Firebase/Firebase";
-import Preview from "../Components/Preview/";
+import EditPreview from "../Components/Preview/editPreview";
 
 const Input = (props) => {
+  const userData = useContext(store);
+  const { dispatch } = userData;
+  let { edit } = userData.state;
+
+  console.log(edit);
+  if (!edit) {
+    edit = JSON.parse(localStorage.getItem("edit"));
+  }
   console.log(props);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [sold, setSold] = useState(false);
-  const isInvalid = title === "" || price === "" || sold === "";
+  //   const isInvalid = title === "" || price === "" || sold === "";
 
-  async function size() {
-    let size = db
-      .collection("items")
-      .get()
-      .then((query) => (size = query.size));
-    return size;
-  }
+  //   async function size() {
+  //     let size = db
+  //       .collection("items")
+  //       .get()
+  //       .then((query) => (size = query.size));
+  //     return size;
+  //   }
 
   const [message, setMessage] = useState("");
 
-  const userData = useContext(store);
-  const { dispatch } = userData;
-
   async function submition(e) {
-    let dbSize = await size();
-
-    const dbNumber = (dbSize + 1).toString();
-    console.log(dbNumber);
     const info = {
-      id: "KF" + dbNumber,
-      title,
-      description,
-      type,
-      price,
+      id: edit.id,
+      title: !title ? edit.title : title,
+      description: !description ? edit.description : description,
+      type: !type ? edit.type : type,
+      price: !price ? edit.price : price,
       sold,
       images: userData.state.images,
     };
-
+    // const dbNumber = (dbSize + 1).toString();
     console.log(info);
-
     db.collection("items")
-      .doc("KF" + dbNumber)
+      .doc(edit.id)
       .set(info)
       .then((res) => {
         console.log("Succesvol upload to database");
         setMessage("Succesvol");
         dispatch({ type: "check", payload: !userData.state.check });
       })
-      .then(() => window.location.reload());
+      .then(() => props.history.push("/home"));
   }
-  // console.log(userData);
+  console.log(userData);
   return (
     <div className="input">
       <form>
         <input
           type="text"
+          defaultValue={edit.title}
           placeholder="Titel"
           name="title"
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           type="text"
+          defaultValue={edit.description}
           placeholder="Beschrijving"
           name="description"
           onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="text"
+          defaultValue={edit.type}
           placeholder="Type kast"
           name="type"
-          onChange={(e) => setType(e.target.value.toLowerCase())}
+          onChange={(e) =>
+            e.target.value === ""
+              ? setType(e.target.defaultValue)
+              : setType(e.target.value.toLowerCase())
+          }
         />
         <input
           type="text"
+          defaultValue={edit.price}
           placeholder="Prijs in euros"
           name="price"
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) =>
+            e.target.value === ""
+              ? setPrice(e.target.defaultValue)
+              : setPrice(e.target.value)
+          }
         />
         <select
           placeholder="Verkocht"
           id="sold"
+          defaultValue={edit.sold}
           name="sold"
-          onChange={(e) => setSold(e.target.value)}
+          onChange={(e) => setSold(e.target.value === "true" ? true : false)}
         >
           <option value="">...</option>
           <option value={true}>Ja</option>
@@ -93,11 +106,9 @@ const Input = (props) => {
         </select>
       </form>
       <AddPicture />
-      <Preview />
+      <EditPreview id={edit.id} />
       <p className="message">{message}</p>
-      <button disabled={isInvalid} onClick={submition}>
-        Uploaden
-      </button>
+      <button onClick={submition}>Uploaden</button>
     </div>
   );
 };

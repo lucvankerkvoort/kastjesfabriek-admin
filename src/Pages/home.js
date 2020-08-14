@@ -5,30 +5,36 @@ import Footer from "../Components/Footer/footer";
 import Collection from "../Components/Collections/collections";
 import { store } from "../Services/Store";
 
-const Home = ({ collections }) => {
+const Home = (props) => {
+  console.log(props);
   const userData = useContext(store);
   const { info } = userData.state;
   const collectionsArray = () => {
     const obj = {};
-    for (let i = 0; i < collections.length; i++) {
-      obj[collections[i].type] = obj[collections[i].type] + 1 || 1;
+    for (let i = 0; i < props.collections.length; i++) {
+      obj[props.collections[i].type] = obj[props.collections[i].type] + 1 || 1;
     }
     return Object.keys(obj);
   };
+  console.log(info);
   return (
     <div className="home">
       <Title title="Collecties" />
-      <Collection title={collectionsArray()} collections={collections} />
+      <Collection title={collectionsArray()} collections={props.collections} />
       <Title title="Producten" />
       <div className="shop">
         {(info || []).map((item, i) => {
           return (
             <Items
+              history={props.history}
               key={i}
+              id={item.id}
               title={item.title}
+              sold={item.sold}
               description={item.description}
               pics={item.images}
               price={item.price}
+              type={item.type}
             />
           );
         })}
