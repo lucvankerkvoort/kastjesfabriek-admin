@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Items from "../Components/Items/item";
 import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
 import { store } from "../Services/Store";
 
-const Collection = () => {
+const Collection = (props) => {
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (localStorage.getItem("authUser") === "") {
+      props.history.push("/");
+    }
+  }, []);
+
   const userData = useContext(store);
   const { collection } = userData.state;
   return (

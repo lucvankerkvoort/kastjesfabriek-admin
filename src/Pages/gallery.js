@@ -7,7 +7,7 @@ const Gallery = ({ picture }) => {
       <Carousel>
         {picture.map((pics, i) => {
           return (
-            <Carousel.Item>
+            <Carousel.Item key={i}>
               <div
                 key={i}
                 className="picture"

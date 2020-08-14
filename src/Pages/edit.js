@@ -1,33 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AddPicture from "../Components/Picture/addpicture";
 import { store } from "../Services/Store";
 import { db } from "../Firebase/Firebase";
 import EditPreview from "../Components/Preview/editPreview";
 
 const Input = (props) => {
+  useEffect(() => {
+    if (localStorage.getItem("authUser") === "") {
+      props.history.push("/");
+    }
+  }, []);
+
   const userData = useContext(store);
   const { dispatch } = userData;
   let { edit } = userData.state;
 
-  console.log(edit);
   if (!edit) {
     edit = JSON.parse(localStorage.getItem("edit"));
   }
-  console.log(props);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [sold, setSold] = useState(false);
-  //   const isInvalid = title === "" || price === "" || sold === "";
-
-  //   async function size() {
-  //     let size = db
-  //       .collection("items")
-  //       .get()
-  //       .then((query) => (size = query.size));
-  //     return size;
-  //   }
 
   const [message, setMessage] = useState("");
 
@@ -41,8 +36,6 @@ const Input = (props) => {
       sold,
       images: userData.state.images,
     };
-    // const dbNumber = (dbSize + 1).toString();
-    console.log(info);
     db.collection("items")
       .doc(edit.id)
       .set(info)
@@ -53,7 +46,6 @@ const Input = (props) => {
       })
       .then(() => props.history.push("/home"));
   }
-  console.log(userData);
   return (
     <div className="input">
       <form>

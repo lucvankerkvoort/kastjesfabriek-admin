@@ -1,11 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AddPicture from "../Components/Picture/addpicture";
 import { store } from "../Services/Store";
 import { db } from "../Firebase/Firebase";
 import Preview from "../Components/Preview/";
 
 const Input = (props) => {
-  console.log(props);
+  const userData = useContext(store);
+  const { dispatch } = userData;
+  useEffect(() => {
+    if (localStorage.getItem("authUser") === "") {
+      props.history.push("/");
+    }
+    dispatch({ type: "images", payload: [] });
+  }, []);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
@@ -23,14 +31,10 @@ const Input = (props) => {
 
   const [message, setMessage] = useState("");
 
-  const userData = useContext(store);
-  const { dispatch } = userData;
-
   async function submition(e) {
     let dbSize = await size();
 
     const dbNumber = (dbSize + 1).toString();
-    console.log(dbNumber);
     const info = {
       id: "KF" + dbNumber,
       title,
@@ -41,19 +45,15 @@ const Input = (props) => {
       images: userData.state.images,
     };
 
-    console.log(info);
-
     db.collection("items")
       .doc("KF" + dbNumber)
       .set(info)
       .then((res) => {
-        console.log("Succesvol upload to database");
         setMessage("Succesvol");
         dispatch({ type: "check", payload: !userData.state.check });
       })
       .then(() => window.location.reload());
   }
-  // console.log(userData);
   return (
     <div className="input">
       <form>

@@ -26,15 +26,12 @@ const CollectionItem = ({ title }) => {
             infoArr.push(doc.data());
             // doc.data() is never undefined for query doc snapshots
             imgArr.push(...doc.data().images);
-            console.log("+1");
           });
           setImages(imgArr);
           setInfo(infoArr);
         });
     }
   }, []);
-  // console.log(images);
-  console.log(info);
   return (
     <Link
       to="/collection"

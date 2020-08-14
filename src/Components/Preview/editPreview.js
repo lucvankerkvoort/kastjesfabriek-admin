@@ -20,7 +20,6 @@ const EditPreview = ({ id }) => {
               ? [...userData.state.images, ...arr]
               : [...arr],
         });
-        console.log(arr);
       });
   }, []);
 
@@ -36,12 +35,12 @@ const EditPreview = ({ id }) => {
   };
   return (
     <>
-      {(userData.state.images || []).map((item) => {
-        console.log(item);
+      {(userData.state.images || []).map((item, i) => {
         return (
           <>
-            <img src={item} alt="..." />
+            <img src={item} key={i} alt="..." />
             <button
+              key={"l" + i}
               onClick={(e) => {
                 removeFromImages(e, item);
               }}

@@ -1,10 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { store } from "../Services/Store";
 import Gallery from "./gallery";
 import images from "../Images/images";
 import emailjs from "emailjs-com";
 
 const Specification = (props) => {
+  useEffect(() => {
+    if (localStorage.getItem("authUser") === "") {
+      props.history.push("/");
+    }
+  }, []);
   const [email, setEmail] = useState("");
   const [item, setItem] = useState("");
   const [message, setMessage] = useState("");
@@ -39,7 +44,6 @@ const Specification = (props) => {
   }
   const { pics, title, description, price } = userData.state.current;
 
-  console.log(userData.state.current);
   return (
     <div className="specification">
       <div className="title-spec">

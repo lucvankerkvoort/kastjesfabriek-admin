@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Items from "../Components/Items/item";
 import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
@@ -6,7 +6,13 @@ import Collection from "../Components/Collections/collections";
 import { store } from "../Services/Store";
 
 const Home = (props) => {
-  console.log(props);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (localStorage.getItem("authUser") === "") {
+      props.history.push("/");
+    }
+  }, []);
+
   const userData = useContext(store);
   const { info } = userData.state;
   const collectionsArray = () => {
@@ -16,7 +22,6 @@ const Home = (props) => {
     }
     return Object.keys(obj);
   };
-  console.log(info);
   return (
     <div className="home">
       <Title title="Collecties" />

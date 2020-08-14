@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { HashRouter, Route, useHistory } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import { withFirebase } from "./Firebase";
 import Navbar from "./Components/Navbar/navbar";
 import Home from "./Pages/home";
@@ -19,32 +19,36 @@ const App = ({ firebase }) => {
   const userData = useContext(store);
   const { dispatch } = userData;
 
+  const logOutBeforeClose = () => {
+    firebase.doSignOut().then(() => localStorage.setItem("authUser", ""));
+  };
+  window.addEventListener("beforeunload", logOutBeforeClose);
   useEffect(
     (arr = []) => {
-      const { dispatch } = userData;
       db.collection("items")
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             arr.push(doc.data());
           });
-          console.log("Arr", arr);
           dispatch({ type: "info", payload: arr });
           setCollections(arr);
         });
     },
     [userData.state.check]
   );
-  console.log(userData);
   return (
     <div className="App">
       <HashRouter basename="/">
-        <Navbar history={useHistory} />
+        <Navbar />
         <Route
           path="/home"
           render={(props) => <Home collections={collections} {...props} />}
         />
-        <Route path="/collection" component={Collection} />
+        <Route
+          path="/collection"
+          render={(props) => <Collection {...props} />}
+        />
         <Route exact path="/" component={SignInPage} />
         <Route path="/edit" render={(props) => <Edit {...props} />} />
         <Route path="/spec" render={(props) => <Specification {...props} />} />
