@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/kastjesfabriek-admin/static/css/main.9170e7f0.chunk.css",
-    "main.js": "/kastjesfabriek-admin/static/js/main.88ea3607.chunk.js",
-    "main.js.map": "/kastjesfabriek-admin/static/js/main.88ea3607.chunk.js.map",
+    "main.css": "/kastjesfabriek-admin/static/css/main.4ba534e7.chunk.css",
+    "main.js": "/kastjesfabriek-admin/static/js/main.43fdb2dd.chunk.js",
+    "main.js.map": "/kastjesfabriek-admin/static/js/main.43fdb2dd.chunk.js.map",
     "runtime-main.js": "/kastjesfabriek-admin/static/js/runtime-main.07300053.js",
     "runtime-main.js.map": "/kastjesfabriek-admin/static/js/runtime-main.07300053.js.map",
-    "static/js/2.acc81240.chunk.js": "/kastjesfabriek-admin/static/js/2.acc81240.chunk.js",
-    "static/js/2.acc81240.chunk.js.map": "/kastjesfabriek-admin/static/js/2.acc81240.chunk.js.map",
+    "static/js/2.22c4bf88.chunk.js": "/kastjesfabriek-admin/static/js/2.22c4bf88.chunk.js",
+    "static/js/2.22c4bf88.chunk.js.map": "/kastjesfabriek-admin/static/js/2.22c4bf88.chunk.js.map",
     "index.html": "/kastjesfabriek-admin/index.html",
-    "precache-manifest.66c198fe51f6c718087196f185a977f9.js": "/kastjesfabriek-admin/precache-manifest.66c198fe51f6c718087196f185a977f9.js",
+    "precache-manifest.2e48e9b8023be774763085edf068c955.js": "/kastjesfabriek-admin/precache-manifest.2e48e9b8023be774763085edf068c955.js",
     "service-worker.js": "/kastjesfabriek-admin/service-worker.js",
-    "static/css/main.9170e7f0.chunk.css.map": "/kastjesfabriek-admin/static/css/main.9170e7f0.chunk.css.map",
-    "static/js/2.acc81240.chunk.js.LICENSE.txt": "/kastjesfabriek-admin/static/js/2.acc81240.chunk.js.LICENSE.txt",
+    "static/css/main.4ba534e7.chunk.css.map": "/kastjesfabriek-admin/static/css/main.4ba534e7.chunk.css.map",
+    "static/js/2.22c4bf88.chunk.js.LICENSE.txt": "/kastjesfabriek-admin/static/js/2.22c4bf88.chunk.js.LICENSE.txt",
     "static/media/IMG-20200720-WA0009.jpg": "/kastjesfabriek-admin/static/media/IMG-20200720-WA0009.c09abf50.jpg",
     "static/media/Logo.png": "/kastjesfabriek-admin/static/media/Logo.e44725f8.png"
   },
   "entrypoints": [
     "static/js/runtime-main.07300053.js",
-    "static/js/2.acc81240.chunk.js",
-    "static/css/main.9170e7f0.chunk.css",
-    "static/js/main.88ea3607.chunk.js"
+    "static/js/2.22c4bf88.chunk.js",
+    "static/css/main.4ba534e7.chunk.css",
+    "static/js/main.43fdb2dd.chunk.js"
   ]
 }
