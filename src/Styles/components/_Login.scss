@@ -1,0 +1,19 @@
+.signin {
+  height: 80vh;
+  width: 250px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  //   background: black;
+  // border: 2px solid black;
+  form {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    input {
+      margin: 10px 0px;
+    }
+  }
+}

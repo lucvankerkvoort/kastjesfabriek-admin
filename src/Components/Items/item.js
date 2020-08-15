@@ -54,24 +54,28 @@ const Items = ({
         <h1>{title}</h1>
       </div>
       <div className="price">
-        <p>€{price},00</p>
+        <p>{price},00</p>
       </div>
       {user !== "" ? (
         <div
           className="remove"
-          onClick={() =>
-            db
-              .collection("items")
-              .doc(id)
-              .delete()
-              .then(() => {
-                setTimeout(
-                  () =>
-                    dispatch({ type: "check", payload: !userData.state.check }),
-                  1000
-                );
-              })
-              .then(() => window.location.reload())
+          onClick={
+            () =>
+              db
+                .collection("items")
+                .doc(id)
+                .delete()
+                .then(() => {
+                  setTimeout(
+                    () =>
+                      dispatch({
+                        type: "check",
+                        payload: !userData.state.check,
+                      }),
+                    1000
+                  );
+                })
+            // .then(() => window.location.reload())
           }
         >
           X

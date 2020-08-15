@@ -5,6 +5,7 @@ import { db } from "../Firebase/Firebase";
 import Preview from "../Components/Preview/";
 
 const Input = (props) => {
+  const [collection, setCollection] = useState([]);
   const userData = useContext(store);
   const { dispatch } = userData;
   useEffect(() => {
@@ -12,6 +13,15 @@ const Input = (props) => {
       props.history.push("/");
     }
     dispatch({ type: "images", payload: [] });
+
+    db.collection("collection")
+      .doc("all")
+      .get()
+      .then((doc) => {
+        let obj = doc.data();
+        console.log(obj);
+        setCollection(Object.keys(obj));
+      });
   }, []);
 
   const [title, setTitle] = useState("");
@@ -19,7 +29,8 @@ const Input = (props) => {
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [sold, setSold] = useState(false);
-  const isInvalid = title === "" || price === "" || sold === "";
+  const [newCollection, setNewCollection] = useState("");
+  const isInvalid = title === "" || price === "" || sold === "" || type === "";
 
   async function size() {
     let size = db
@@ -39,7 +50,7 @@ const Input = (props) => {
       id: "KF" + dbNumber,
       title,
       description,
-      type,
+      type: newCollection ? newCollection : type,
       price,
       sold,
       images: userData.state.images,
@@ -51,53 +62,94 @@ const Input = (props) => {
       .then((res) => {
         setMessage("Succesvol");
         dispatch({ type: "check", payload: !userData.state.check });
-      })
-      .then(() => window.location.reload());
+      });
+    // .then(() => window.location.reload());
   }
+
   return (
     <div className="input">
-      <form>
-        <input
-          type="text"
-          placeholder="Titel"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          type="text"
-          placeholder="Beschrijving"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Type kast"
-          name="type"
-          onChange={(e) => setType(e.target.value.toLowerCase())}
-        />
-        <input
-          type="text"
-          placeholder="Prijs in euros"
-          name="price"
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <select
-          placeholder="Verkocht"
-          id="sold"
-          name="sold"
-          onChange={(e) => setSold(e.target.value)}
-        >
-          <option value="">...</option>
-          <option value={true}>Ja</option>
-          <option value={false}>Nee</option>
-        </select>
-      </form>
       <AddPicture />
       <Preview />
-      <p className="message">{message}</p>
-      <button disabled={isInvalid} onClick={submition}>
-        Uploaden
-      </button>
+
+      <form>
+        <div className="form-group">
+          <label for="titel">Titel</label>
+          <input
+            type="text"
+            className="form-control"
+            id="titel"
+            aria-describedby="titel"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Beschrijving</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </div>
+
+        <div className="form-group">
+          <label for="exampleFormControlSelect1">Collectie</label>
+          <select
+            className="form-control"
+            id="exampleFormControlSelect1"
+            onChange={(e) => setType(e.target.value.toLowerCase())}
+          >
+            <option>...</option>
+            {collection.map((option) => {
+              return <option>{option}</option>;
+            })}
+            <option>nieuwe collectie toevoegen</option>
+          </select>
+        </div>
+        {type === "nieuwe collectie toevoegen" ? (
+          <div className="form-group">
+            <label for="newCollection">Nieuwe Collectie</label>
+            <input
+              type="text"
+              className="form-control"
+              id="newCollection"
+              onChange={(e) => setNewCollection(e.target.value)}
+            />
+          </div>
+        ) : null}
+
+        <div className="form-group">
+          <label for="prijs">Prijs in Euros</label>
+          <input
+            type="text"
+            defaultValue="€"
+            className="form-control"
+            id="titel"
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label for="sold">Verkocht?</label>
+          <select
+            className="form-control"
+            id="sold"
+            onChange={(e) => setSold(e.target.value === "true" ? true : false)}
+          >
+            <option value="">...</option>
+            <option value={true}>Ja</option>
+            <option value={false}>Nee</option>
+          </select>
+        </div>
+        <p>{message}</p>
+        <button
+          disabled={isInvalid}
+          onClick={submition}
+          className="btn btn-primary"
+        >
+          Uploaden
+        </button>
+      </form>
     </div>
   );
 };

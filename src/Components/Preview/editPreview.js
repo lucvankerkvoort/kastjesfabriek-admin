@@ -34,23 +34,32 @@ const EditPreview = ({ id }) => {
     }
   };
   return (
-    <>
+    <div className="preview">
       {(userData.state.images || []).map((item, i) => {
         return (
           <>
-            <img src={item} key={i} alt="..." />
-            <button
-              key={"l" + i}
-              onClick={(e) => {
-                removeFromImages(e, item);
-              }}
-            >
-              verwijderen
-            </button>
+            <div className="preview-item">
+              <div
+                className="preview-pic"
+                key={i}
+                style={{
+                  background: `url(${item}) no-repeat center/contain`,
+                }}
+              />
+              {/* <img src={item} key={i} alt="..." /> */}
+              <button
+                key={"l" + i}
+                onClick={(e) => {
+                  removeFromImages(e, item);
+                }}
+              >
+                verwijderen
+              </button>
+            </div>
           </>
         );
       })}
-    </>
+    </div>
   );
 };
 

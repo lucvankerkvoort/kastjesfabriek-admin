@@ -4,6 +4,7 @@ import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
 import Collection from "../Components/Collections/collections";
 import { store } from "../Services/Store";
+import { db } from "../Firebase/Firebase";
 
 const Home = (props) => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const Home = (props) => {
     for (let i = 0; i < props.collections.length; i++) {
       obj[props.collections[i].type] = obj[props.collections[i].type] + 1 || 1;
     }
+    db.collection("collection").doc("all").set(obj);
     return Object.keys(obj);
   };
   return (

@@ -17,22 +17,31 @@ const Preview = () => {
     }
   };
   return (
-    <>
-      {(userData.state.images || []).map((item) => {
+    <div className="preview">
+      {(userData.state.images || []).map((item, i) => {
         return (
           <>
-            <img src={item} alt="..." />
-            <button
-              onClick={(e) => {
-                removeFromImages(e, item);
-              }}
-            >
-              verwijderen
-            </button>
+            <div className="preview-item">
+              <div
+                className="preview-pic"
+                key={i}
+                style={{
+                  background: `url(${item}) no-repeat center/contain`,
+                }}
+              />
+              {/* <img src={item} alt="..." /> */}
+              <button
+                onClick={(e) => {
+                  removeFromImages(e, item);
+                }}
+              >
+                verwijderen
+              </button>
+            </div>
           </>
         );
       })}
-    </>
+    </div>
   );
 };
 

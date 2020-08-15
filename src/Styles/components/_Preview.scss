@@ -1,0 +1,22 @@
+.preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 300px;
+  width: 100%;
+  .preview-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .preview-pic {
+      margin: 10px 0px;
+      height: 100%;
+      width: 250px;
+    }
+    button {
+      padding: 3px;
+      margin: 10px;
+    }
+  }
+}

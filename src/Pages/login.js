@@ -5,7 +5,7 @@ import { store } from "../Services/Store";
 import { withFirebase } from "../Firebase";
 
 const SignInPage = () => (
-  <div>
+  <div className="signin">
     <h1>SignIn</h1>
     <SignInForm />
   </div>

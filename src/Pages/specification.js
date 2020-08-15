@@ -66,7 +66,7 @@ const Specification = (props) => {
         </div>
         <div className="detail-spec">
           <p>Omschrijving: {description}</p>
-          <p>Prijs: €{price},-</p>
+          <p>Prijs: {price},-</p>
           <p>Je kan deze producten kopen via</p>
           <form className="sending-inquiry" onSubmit={handleEmail}>
             <input
