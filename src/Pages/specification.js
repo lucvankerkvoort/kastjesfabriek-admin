@@ -67,8 +67,7 @@ const Specification = (props) => {
         <div className="detail-spec">
           <p>Omschrijving: {description}</p>
           <p>Prijs: {price},-</p>
-          <p>Je kan deze producten kopen via</p>
-          <form className="sending-inquiry" onSubmit={handleEmail}>
+          {/* <form className="sending-inquiry" onSubmit={handleEmail}>
             <input
               name="email"
               type="email"
@@ -83,7 +82,7 @@ const Specification = (props) => {
               onChange={(e) => setMessage(e.target.value)}
             />
             <button>Verzenden</button>
-          </form>
+          </form> */}
         </div>
       </div>
     </div>

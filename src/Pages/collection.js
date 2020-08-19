@@ -21,7 +21,9 @@ const Collection = (props) => {
         {(collection || []).map((item, i) => {
           return (
             <Items
+              history={props.history}
               key={i}
+              id={item.id}
               title={item.title}
               description={item.description}
               pics={item.images}
