@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { storage } from "../../Firebase/Firebase";
 import { store } from "../../Services/Store";
-const AddPicture = () => {
+const AddPicture = ({ setImage }) => {
   const userData = useContext(store);
   const { dispatch } = userData;
 
@@ -11,7 +11,7 @@ const AddPicture = () => {
     const image = e.target.files[0];
     setImageAsFile((imageFile) => image);
   };
-
+  console.log(setImage());
   const handleFireBaseUpload = (e) => {
     e.preventDefault();
     console.log("start of upload");
@@ -40,6 +40,7 @@ const AddPicture = () => {
           .child(imageAsFile.name)
           .getDownloadURL()
           .then((fireBaseUrl) => {
+            setImage()(true);
             dispatch({
               type: "images",
               payload: userData.state.images

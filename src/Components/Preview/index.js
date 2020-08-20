@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { store } from "../../Services/Store";
 
-const Preview = () => {
+const Preview = ({ setImage }) => {
   const userData = useContext(store);
   const { dispatch } = userData;
 
@@ -33,6 +33,7 @@ const Preview = () => {
               <button
                 onClick={(e) => {
                   removeFromImages(e, item);
+                  setImage()(false);
                 }}
               >
                 verwijderen

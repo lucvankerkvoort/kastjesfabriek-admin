@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { store } from "../Services/Store";
 import Gallery from "./gallery";
 import images from "../Images/images";
-import emailjs from "emailjs-com";
 
 const Specification = (props) => {
   useEffect(() => {
@@ -10,35 +9,33 @@ const Specification = (props) => {
       props.history.push("/");
     }
   }, []);
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
 
-  const handleEmail = (e) => {
-    e.preventDefault();
+  // const handleEmail = (e) => {
+  //   e.preventDefault();
 
-    // const templateParams = {
-    //   from_name: ` ${title} (${email})`,
-    //   to_name: "luc.van.kerkvoort@gmail.com",
-    //   message_html: message,
-    // };
-    // emailjs
-    //   .send(
-    //     "luc_van_kerkvoort",
-    //     "template_w911gCXB",
-    //     templateParams,
-    //     "user_rpcRGHi1Y0p1xl1IdxtTc"
-    //   )
-    //   .then(
-    //     function (response) {
-    //       console.log("SUCCESS!", response.status, response.text);
-    //     },
-    //     function (err) {
-    //       console.log("Your message was not able to be sent", err);
-    //     }
-    //   );
-    // setEmail("");
-    // setMessage("");
-  };
+  // const templateParams = {
+  //   from_name: ` ${title} (${email})`,
+  //   to_name: "luc.van.kerkvoort@gmail.com",
+  //   message_html: message,
+  // };
+  // emailjs
+  //   .send(
+  //     "luc_van_kerkvoort",
+  //     "template_w911gCXB",
+  //     templateParams,
+  //     "user_rpcRGHi1Y0p1xl1IdxtTc"
+  //   )
+  //   .then(
+  //     function (response) {
+  //       console.log("SUCCESS!", response.status, response.text);
+  //     },
+  //     function (err) {
+  //       console.log("Your message was not able to be sent", err);
+  //     }
+  //   );
+  // setEmail("");
+  // setMessage("");
+  // };
   const goBack = props.history.goBack;
   const userData = useContext(store);
 

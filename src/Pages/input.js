@@ -24,14 +24,24 @@ const Input = (props) => {
       });
   }, []);
 
+  console.log(userData);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [sold, setSold] = useState(false);
   const [newCollection, setNewCollection] = useState("");
-  const isInvalid = title === "" || price === "" || sold === "" || type === "";
+  const [images, setImages] = useState(false);
+  const isInvalid =
+    images === false ||
+    title === "" ||
+    price === "" ||
+    sold === "" ||
+    type === "";
 
+  const imageBeenSet = (input) => {
+    setImages(input);
+  };
   async function size() {
     let size = db
       .collection("items")
@@ -66,10 +76,11 @@ const Input = (props) => {
     // .then(() => window.location.reload());
   }
 
+  console.log(userData.state.images);
   return (
     <div className="input">
-      <AddPicture />
-      <Preview />
+      <AddPicture setImage={() => imageBeenSet} />
+      <Preview setImage={() => imageBeenSet} />
 
       <form>
         <div className="form-group">
