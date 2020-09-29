@@ -11,7 +11,6 @@ const AddPicture = ({ setImage }) => {
     const image = e.target.files[0];
     setImageAsFile((imageFile) => image);
   };
-  console.log(setImage());
   const handleFireBaseUpload = (e) => {
     e.preventDefault();
     console.log("start of upload");
