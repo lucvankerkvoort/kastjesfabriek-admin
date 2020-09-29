@@ -33,11 +33,7 @@ const Input = (props) => {
   const [newCollection, setNewCollection] = useState("");
   const [images, setImages] = useState(false);
   const isInvalid =
-    images === false ||
-    title === "" ||
-    price === "" ||
-    sold === "" ||
-    type === "";
+    images === false || title === "" || price === "" || sold === "";
 
   const imageBeenSet = (input) => {
     setImages(input);

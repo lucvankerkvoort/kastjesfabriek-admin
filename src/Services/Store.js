@@ -16,7 +16,10 @@ const StateProvider = ({ children }) => {
       case "info":
         return Object.assign({}, state, { info: action.payload });
       case "check":
-        return Object.assign({}, state, { check: action.payload });
+        return (
+          console.log("I run"),
+          Object.assign({}, state, { check: action.payload })
+        );
       case "current":
         return Object.assign({}, state, { current: action.payload });
       case "collection":
