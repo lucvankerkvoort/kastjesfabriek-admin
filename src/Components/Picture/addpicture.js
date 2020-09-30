@@ -39,7 +39,7 @@ const AddPicture = ({ setImage }) => {
           .child(imageAsFile.name)
           .getDownloadURL()
           .then((fireBaseUrl) => {
-            setImage()(true);
+            setImage(true);
             dispatch({
               type: "images",
               payload: userData.state.images

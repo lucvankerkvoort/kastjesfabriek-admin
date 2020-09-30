@@ -75,7 +75,7 @@ const Input = (props) => {
   console.log(userData.state.images);
   return (
     <div className="input">
-      <AddPicture setImage={() => imageBeenSet} />
+      <AddPicture setImage={(input) => setImages(input)} />
       <Preview setImage={() => imageBeenSet} />
 
       <form>
@@ -105,7 +105,7 @@ const Input = (props) => {
           <select
             className="form-control"
             id="exampleFormControlSelect1"
-            onChange={(e) => setType(e.target.value.toLowerCase())}
+            onChange={(e) => setType(e.target.value)}
           >
             <option>...</option>
             {collection.map((option) => {

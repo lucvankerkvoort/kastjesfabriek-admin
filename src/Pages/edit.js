@@ -5,7 +5,16 @@ import { db } from "../Firebase/Firebase";
 import EditPreview from "../Components/Preview/editPreview";
 
 const Input = (props) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+  const [price, setPrice] = useState("");
+  const [sold, setSold] = useState(false);
+  const [images, setImages] = useState(false);
   const [collection, setCollection] = useState([]);
+
+  const userData = useContext(store);
+  const { dispatch } = userData;
   useEffect(() => {
     if (localStorage.getItem("authUser") === "") {
       props.history.push("/");
@@ -21,22 +30,15 @@ const Input = (props) => {
       });
   }, []);
 
-  const userData = useContext(store);
-  const { dispatch } = userData;
   let { edit } = userData.state;
 
   if (!edit) {
     edit = JSON.parse(localStorage.getItem("edit"));
   }
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
-  const [price, setPrice] = useState("");
-  const [sold, setSold] = useState(false);
 
+  console.log(userData.state);
   const [message, setMessage] = useState("");
 
-  const isInvalid = type === "";
   async function submition(e) {
     const info = {
       id: edit.id,
@@ -59,7 +61,7 @@ const Input = (props) => {
   }
   return (
     <div className="input">
-      <AddPicture />
+      <AddPicture setImage={(input) => setImages(input)} />
       <EditPreview id={edit.id} />
       <form>
         <div className="form-group">
@@ -142,11 +144,7 @@ const Input = (props) => {
           </select>
         </div>
         <p>{message}</p>
-        <button
-          disabled={isInvalid}
-          onClick={submition}
-          className="btn btn-primary"
-        >
+        <button onClick={submition} className="btn btn-primary">
           Uploaden
         </button>
       </form>
