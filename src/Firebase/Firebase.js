@@ -17,25 +17,28 @@ app.initializeApp(config);
 
 const db = app.firestore();
 const storage = app.storage();
+const auth = app.auth();
 
-class Firebase {
-  constructor() {
-    this.auth = app.auth();
-  }
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+// class Firebase {
+//   constructor() {
+//     this.auth = app.auth();
+//   }
+//   doCreateUserWithEmailAndPassword = (email, password) =>
+//     this.auth.createUserWithEmailAndPassword(email, password);
 
-  doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password);
+//   doSignInWithEmailAndPassword = (email, password) =>
+//     this.auth.signInWithEmailAndPassword(email, password);
 
-  doSignOut = () => this.auth.signOut();
+//   doSignOut = () => this.auth.signOut();
 
-  doPasswordReset = (email) => this.auth.sendPasswordResetEmail(email);
+//   doPasswordReset = (email) => this.auth.sendPasswordResetEmail(email);
 
-  doPasswordUpdate = (password) =>
-    this.auth.currentUser.updatePassword(password);
-}
+//   doPasswordUpdate = (password) =>
+//     this.auth.currentUser.updatePassword(password);
 
-export default Firebase;
+//     doOnAuthStateChanged = () => this.auth.onAuthStateChanged(authUser => )
+// }
 
-export { storage, db };
+// export default Firebase;
+
+export { storage, db, auth };

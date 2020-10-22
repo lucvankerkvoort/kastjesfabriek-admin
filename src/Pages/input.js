@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from "react";
 import AddPicture from "../Components/Picture/addpicture";
 import { store } from "../Services/Store";
@@ -6,6 +7,7 @@ import Preview from "../Components/Preview/";
 
 const Input = (props) => {
   const [collection, setCollection] = useState([]);
+  const [type, setType] = useState({});
   const userData = useContext(store);
   const { dispatch } = userData;
   useEffect(() => {
@@ -19,18 +21,19 @@ const Input = (props) => {
       .get()
       .then((doc) => {
         let obj = doc.data();
-        console.log(obj);
+        console.log("object", obj);
         setCollection(Object.keys(obj));
+        setType(obj);
       });
   }, []);
 
-  console.log(userData);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [sold, setSold] = useState(false);
-  const [newCollection, setNewCollection] = useState("");
+  const [newCollectionName, setNewCollectionName] = useState("");
+  const [addCollection, setAddCollection] = useState(false);
+  const [itemCollection, setItemCollections] = useState([]);
   const [images, setImages] = useState(false);
   const isInvalid =
     images === false || title === "" || price === "" || sold === "";
@@ -49,6 +52,7 @@ const Input = (props) => {
   const [message, setMessage] = useState("");
 
   async function submition(e) {
+    e.preventDefault();
     let dbSize = await size();
 
     const dbNumber = (dbSize + 1).toString();
@@ -56,7 +60,7 @@ const Input = (props) => {
       id: "KF" + dbNumber,
       title,
       description,
-      type: newCollection ? newCollection : type,
+      Collection: [...itemCollection, newCollectionName],
       price,
       sold,
       images: userData.state.images,
@@ -72,9 +76,10 @@ const Input = (props) => {
     // .then(() => window.location.reload());
   }
 
-  console.log(userData.state.images);
+  console.log(itemCollection);
   return (
     <div className="input">
+      {console.log("itemCollection", itemCollection)}
       <AddPicture setImage={(input) => setImages(input)} />
       <Preview setImage={() => imageBeenSet} />
 
@@ -102,39 +107,75 @@ const Input = (props) => {
 
         <div className="form-group">
           <label for="exampleFormControlSelect1">Collectie</label>
-          <select
-            className="form-control"
-            id="exampleFormControlSelect1"
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option>...</option>
-            {collection.map((option) => {
-              return <option>{option}</option>;
-            })}
-            <option>nieuwe collectie toevoegen</option>
-          </select>
+          {collection.map((option) => (
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name={option}
+                id="defaultCheck1"
+                onChange={(e) => {
+                  console.log("e", e.target);
+                  const { name, checked } = e.target;
+                  console.log(checked);
+                  if (checked) {
+                    setItemCollections([...itemCollection, name]);
+                  } else {
+                    let removedArray = itemCollection;
+                    let removeableItem = removedArray.indexOf(name);
+                    let remove = removedArray.splice(removeableItem, 1);
+                    console.log("number", removeableItem);
+                    console.log("removed array", remove);
+                    console.log(removedArray);
+                    setItemCollections(removedArray);
+                  }
+                }}
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                {option}
+              </label>
+            </div>
+          ))}
+
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="nieuwe collectie toevoegen"
+              id="defaultCheck1"
+              onChange={(e) => setAddCollection(e.target.checked)}
+            />
+            <label class="form-check-label" for="defaultCheck1">
+              nieuwe collectie toevoegen
+            </label>
+          </div>
         </div>
-        {type === "nieuwe collectie toevoegen" ? (
+        {addCollection ? (
           <div className="form-group">
             <label for="newCollection">Nieuwe Collectie</label>
             <input
               type="text"
               className="form-control"
               id="newCollection"
-              onChange={(e) => setNewCollection(e.target.value)}
+              onChange={(e) => setNewCollectionName(e.target.value)}
             />
           </div>
         ) : null}
 
         <div className="form-group">
           <label for="prijs">Prijs in Euros</label>
-          <input
-            type="text"
-            defaultValue="€"
-            className="form-control"
-            id="titel"
-            onChange={(e) => setPrice(e.target.value)}
-          />
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">€</div>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="inlineFormInputGroupUsername"
+              placeholder="Prijs"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
         </div>
         <div className="form-group">
           <label for="sold">Verkocht?</label>

@@ -4,7 +4,7 @@ import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
 import Collection from "../Components/Collections/collections";
 import { store } from "../Services/Store";
-import { db } from "../Firebase/Firebase";
+// import { db } from "../Firebase/Firebase";
 
 const Home = (props) => {
   useEffect(() => {
@@ -16,18 +16,22 @@ const Home = (props) => {
 
   const userData = useContext(store);
   const { info } = userData.state;
-  const collectionsArray = () => {
-    const obj = {};
-    for (let i = 0; i < props.collections.length; i++) {
-      obj[props.collections[i].type] = obj[props.collections[i].type] + 1 || 1;
-    }
-    db.collection("collection").doc("all").set(obj);
-    return Object.keys(obj);
-  };
+  // const collectionsArray = () => {
+  //   const obj = {};
+  //   for (let i = 0; i < props.collections.length; i++) {
+  //     // props.collections[i].type.forEach()
+  //     obj[props.collections[i].type] = obj[props.collections[i].type] + 1 || 1;
+  //   }
+  //   db.collection("collection").doc("all").set(obj);
+  //   return Object.keys(obj);
+  // };
   return (
     <div className="home">
       <Title title="Collecties" />
-      <Collection title={collectionsArray()} collections={props.collections} />
+      <Collection
+        title={props.collectionTitles}
+        collections={props.collections}
+      />
       <Title title="Producten" />
       <div className="shop">
         {(info || []).map((item, i) => {
@@ -41,7 +45,7 @@ const Home = (props) => {
               description={item.description}
               pics={item.images}
               price={item.price}
-              type={item.type}
+              type={item.Collection}
             />
           );
         })}

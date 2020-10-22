@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { store } from "../Services/Store";
-import { withFirebase } from "../Firebase";
+import { auth } from "../Firebase/Firebase";
 
 const SignInPage = () => (
   <div className="signin">
@@ -29,13 +29,15 @@ class SignInFormBase extends Component {
     const { dispatch } = this.context;
     const { email, password } = this.state;
 
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
+    auth
+      .signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.setState({ ...INITIAL_STATE });
-        localStorage.setItem("authUser", JSON.stringify(user.user.l));
+        console.log("user inside login",user)
+        localStorage.setItem("authUser", JSON.stringify(user.user));
       })
-      .then(() => {
+      .then((data) => {
+        console.log(data)
         dispatch({ type: "authed", payload: true });
         this.props.history.push("/home");
       })
@@ -81,7 +83,7 @@ class SignInFormBase extends Component {
   }
 }
 
-const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
+const SignInForm = compose(withRouter)(SignInFormBase);
 
 export default SignInPage;
 

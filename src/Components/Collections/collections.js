@@ -2,9 +2,11 @@ import React from "react";
 import CollectionItem from "./collection-item";
 
 const Collection = ({ title }) => {
+  console.log("title", title);
   return (
     <div className="collection">
-      {title.map((title, i) => (
+      {console.log("title", title)}
+      {(title || []).map((title, i) => (
         <CollectionItem key={i} title={title} />
       ))}
       {/* <CollectionItem title="Thee Kastjes" picture={images.donkerGroen001} />

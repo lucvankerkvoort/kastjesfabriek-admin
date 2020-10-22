@@ -19,10 +19,11 @@ const CollectionItem = ({ title }) => {
     const infoArr = [];
     if (title) {
       db.collection("items")
-        .where("type", "==", title)
+        .where("Collection", "array-contains", title)
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
+            // console.log("docData inside Collection-item", doc.data());
             infoArr.push(doc.data());
             // doc.data() is never undefined for query doc snapshots
             imgArr.push(...doc.data().images);
@@ -37,6 +38,8 @@ const CollectionItem = ({ title }) => {
       to="/collection"
       onClick={() => dispatch({ type: "collection", payload: info })}
     >
+      {/* {console.log("this is info inside colleciton item", info)}
+      {console.log("this is images inside colleciton item", images)} */}
       <div className="collection-item">
         <h5 className="collection-item-title">{collectionTitle()}</h5>
         <div

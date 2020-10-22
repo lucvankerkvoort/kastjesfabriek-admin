@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="logo">
-        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/home" style={{ textDecoration: "none", color: "black" }}>
           <img src={image.Logo} alt="logo" width="75px" height="75px" />
         </Link>
       </div>

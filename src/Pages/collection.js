@@ -27,6 +27,7 @@ const Collection = (props) => {
               title={item.title}
               description={item.description}
               pics={item.images}
+              sold={item.sold}
               price={item.price}
             />
           );

@@ -11,7 +11,7 @@ const Items = ({
   pics,
   sold,
   description,
-  type,
+  Collection,
   history,
 }) => {
   const [user, setUser] = useState("");
@@ -22,9 +22,10 @@ const Items = ({
     price,
     pics,
     description,
-    type,
+    Collection,
   };
 
+  console.log("sold inside item", sold);
   useEffect(() => {
     setUser(localStorage.getItem("authUser"));
   }, [userData.state.authed]);
@@ -48,14 +49,17 @@ const Items = ({
         </div>
       </Link>
 
-      {sold ? <SoldBanner /> : null}
-
       <div className="item-title">
         <h1>{title}</h1>
       </div>
-      <div className="price">
-        <p>{price},00</p>
-      </div>
+
+      {sold ? (
+        <SoldBanner />
+      ) : (
+        <div className="price">
+          <p>{price},00</p>
+        </div>
+      )}
       {user !== "" ? (
         <div
           className="remove"

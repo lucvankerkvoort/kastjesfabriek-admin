@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import { store } from "../../Services/Store";
+import {auth} from "../../Firebase/Firebase"
 
-import { withFirebase } from "../../Firebase";
-
-const SignOutButton = ({ firebase }) => {
+const SignOutButton = () => {
   const userData = useContext(store);
   const { dispatch } = userData;
   return (
     <p
       type="button"
       onClick={() => {
-        firebase
-          .doSignOut()
+        auth
+          .SignOut()
           .then(() => localStorage.setItem("authUser", ""))
           .then(() => dispatch({ type: "authed", payload: false }));
 
@@ -24,4 +23,4 @@ const SignOutButton = ({ firebase }) => {
   );
 };
 
-export default withFirebase(SignOutButton);
+export default SignOutButton;
