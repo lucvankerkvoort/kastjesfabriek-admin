@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, useHistory } from "react-router-dom";
 import Navbar from "./Components/Navbar/navbar";
 import Home from "./Pages/home";
 import Input from "./Pages/input";
 import Collection from "./Pages/collection";
+import Remove from "./Components/Modal/remove";
 import Edit from "./Pages/edit";
 // import Help from "./Pages/help";
 // import About from "./Pages/about";
@@ -18,6 +19,7 @@ const App = () => {
   const [collections, setCollections] = useState("");
   const userData = useContext(store);
   const { dispatch } = userData;
+  const { remove } = userData.state;
 
   const logOutBeforeClose = () => {
     auth.doSignOut().then(() => localStorage.setItem("authUser", ""));
@@ -54,12 +56,21 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [userData.state.check]
   );
+
+  // const history = useHistory();
   return (
     <div className="App">
       {/* {console.log("info inside of App", userData.state.info)}
       {console.log("test inside of App", collectionTitles)} */}
       <HashRouter basename="/">
         <Navbar />
+
+        {remove ? (
+          <Remove
+            history={useHistory}
+            message="Are you sure you want to remove this item"
+          />
+        ) : null}
         <Route
           path="/home"
           render={(props) => (

@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 // voor nu even true!!
-const initialState = { images: [] };
+const initialState = { images: [], remove: false };
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -26,6 +26,10 @@ const StateProvider = ({ children }) => {
         return Object.assign({}, state, { collection: action.payload });
       case "edit":
         return Object.assign({}, state, { edit: action.payload });
+      case "id-remove":
+        return Object.assign({}, state, { removeId: action.payload });
+      case "remove":
+        return Object.assign({}, state, { remove: action.payload });
       default:
         throw new Error();
     }

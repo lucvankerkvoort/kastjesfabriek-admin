@@ -2,7 +2,10 @@ import React from "react";
 import CollectionItem from "./collection-item";
 
 const Collection = ({ title }) => {
-  console.log("title", title);
+  console.log("title", Object.keys(title).length === 0);
+  if (Object.keys(title).length === 0) {
+    title = [localStorage.getItem("title")];
+  }
   return (
     <div className="collection">
       {console.log("title", title)}

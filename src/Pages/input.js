@@ -60,12 +60,15 @@ const Input = (props) => {
       id: "KF" + dbNumber,
       title,
       description,
-      Collection: [...itemCollection, newCollectionName],
+      Collection: newCollectionName
+        ? [...itemCollection, newCollectionName]
+        : [...itemCollection],
       price,
       sold,
       images: userData.state.images,
     };
 
+    console.log(info.Collection);
     db.collection("items")
       .doc("KF" + dbNumber)
       .set(info)

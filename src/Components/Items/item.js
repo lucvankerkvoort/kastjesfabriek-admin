@@ -30,6 +30,22 @@ const Items = ({
     setUser(localStorage.getItem("authUser"));
   }, [userData.state.authed]);
 
+  const removeItem = () => {
+    db.collection("items")
+      .doc(id)
+      .delete()
+      .then(() => {
+        setTimeout(
+          () =>
+            dispatch({
+              type: "check",
+              payload: !userData.state.check,
+            }),
+          1000
+        );
+      });
+  };
+
   return (
     <div className="item">
       <Link
@@ -63,24 +79,10 @@ const Items = ({
       {user !== "" ? (
         <div
           className="remove"
-          onClick={
-            () =>
-              db
-                .collection("items")
-                .doc(id)
-                .delete()
-                .then(() => {
-                  setTimeout(
-                    () =>
-                      dispatch({
-                        type: "check",
-                        payload: !userData.state.check,
-                      }),
-                    1000
-                  );
-                })
-            // .then(() => window.location.reload())
-          }
+          onClick={() => {
+            dispatch({ type: "id-remove", payload: id });
+            dispatch({ type: "remove", payload: true });
+          }}
         >
           X
         </div>

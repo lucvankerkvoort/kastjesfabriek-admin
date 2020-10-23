@@ -3,11 +3,13 @@ import Items from "../Components/Items/item";
 import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
 import Collection from "../Components/Collections/collections";
+import Remove from "../Components/Modal/remove";
 import { store } from "../Services/Store";
 // import { db } from "../Firebase/Firebase";
 
 const Home = (props) => {
   useEffect(() => {
+    localStorage.setItem("title", props.collectionTitles);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     if (localStorage.getItem("authUser") === "") {
       props.history.push("/");
