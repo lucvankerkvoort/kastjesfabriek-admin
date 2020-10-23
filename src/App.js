@@ -30,7 +30,7 @@ const App = () => {
       auth.onAuthStateChanged((authUser) => {
         console.log(authUser);
         dispatch({ type: "user", payload: authUser });
-        localStorage.setItem("authUser", authUser);
+        localStorage.setItem("authUser", JSON.stringify(authUser));
       });
       db.collection("items")
         .get()

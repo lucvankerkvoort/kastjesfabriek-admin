@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { store } from "../../Services/Store";
-import {auth} from "../../Firebase/Firebase"
+import { auth } from "../../Firebase/Firebase";
 
 const SignOutButton = () => {
   const userData = useContext(store);
@@ -10,7 +10,7 @@ const SignOutButton = () => {
       type="button"
       onClick={() => {
         auth
-          .SignOut()
+          .signOut()
           .then(() => localStorage.setItem("authUser", ""))
           .then(() => dispatch({ type: "authed", payload: false }));
 
@@ -18,6 +18,7 @@ const SignOutButton = () => {
         // execute.then(() => );
       }}
     >
+      {console.log(localStorage.getItem("authUser"))}
       Sign Out
     </p>
   );
