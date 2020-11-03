@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { store } from "../../Services/Store";
 import image from "../../Images/images";
 import SignOutButton from "../SignOutButton";
-const Navbar = () => {
+const Navbar = ({ loggedIn = false }) => {
   return (
     <div className="navbar">
       <div className="logo">
@@ -11,7 +12,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {localStorage.getItem("authUser") !== "" ? (
+      {loggedIn ? (
         <div className="navbar-items">
           <Link to="/home" style={{ textDecoration: "none", color: "black" }}>
             <p> Assortiment </p>

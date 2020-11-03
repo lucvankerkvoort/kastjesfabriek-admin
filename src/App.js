@@ -17,18 +17,20 @@ import { db, auth } from "./Firebase/Firebase";
 const App = () => {
   const [collectionTitles, setCollectionTitles] = useState({});
   const [collections, setCollections] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   const userData = useContext(store);
   const { dispatch } = userData;
   const { remove } = userData.state;
 
-  const logOutBeforeClose = () => {
-    auth.doSignOut().then(() => localStorage.setItem("authUser", ""));
-  };
-  window.addEventListener("beforeunload", logOutBeforeClose);
   useEffect(
     (arr = [], test = {}, testArr = []) => {
       auth.onAuthStateChanged((authUser) => {
         console.log(authUser);
+        if (authUser !== null) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
         dispatch({ type: "user", payload: authUser });
         localStorage.setItem("authUser", JSON.stringify(authUser));
       });
@@ -63,7 +65,7 @@ const App = () => {
       {/* {console.log("info inside of App", userData.state.info)}
       {console.log("test inside of App", collectionTitles)} */}
       <HashRouter basename="/">
-        <Navbar />
+        <Navbar loggedIn={loggedIn} />
 
         {remove ? (
           <Remove

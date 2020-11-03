@@ -23,6 +23,12 @@ class SignInFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  // componentDidMount = () => {
+  //   const obj = JSON.parse(localStorage.getItem("authUser"));
+  //   if (obj === null) {
+  //   }
+  // };
+
   static contextType = store;
 
   onSubmit = (event) => {
@@ -32,12 +38,13 @@ class SignInFormBase extends Component {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.setState({ ...INITIAL_STATE });
-        console.log("user inside login",user)
+        // this.setState({ ...INITIAL_STATE });
+        console.log("user inside login", user);
+        dispatch({ type: "user", payload: user.user });
         localStorage.setItem("authUser", JSON.stringify(user.user));
       })
       .then((data) => {
-        console.log(data)
+        console.log(data);
         dispatch({ type: "authed", payload: true });
         this.props.history.push("/home");
       })

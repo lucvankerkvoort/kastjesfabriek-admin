@@ -25,7 +25,6 @@ const Items = ({
     Collection,
   };
 
-  console.log("sold inside item", sold);
   useEffect(() => {
     setUser(localStorage.getItem("authUser"));
   }, [userData.state.authed]);
