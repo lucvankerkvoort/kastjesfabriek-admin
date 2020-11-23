@@ -23,6 +23,8 @@ const Input = (props) => {
       props.history.push("/");
     }
 
+    setItemCollections(edit.Collection);
+
     db.collection("collection")
       .doc("all")
       .get()
@@ -35,6 +37,13 @@ const Input = (props) => {
 
   let { edit } = userData.state;
 
+  const checked = (option, i) => {
+    if (itemCollection.includes(option)) {
+      document.getElementById(`defaultCheck${i}`).checked = true;
+    } else {
+      document.getElementById(`defaultCheck${i}`).checked = false;
+    }
+  };
   if (!edit) {
     edit = JSON.parse(localStorage.getItem("edit"));
   }
@@ -49,22 +58,22 @@ const Input = (props) => {
       title: !title ? edit.title : title,
       description: !description ? edit.description : description,
       Collection: !newCollectionName
-        ? [...edit.Collection, ...itemCollection]
-        : [...edit.Collection, ...itemCollection, newCollectionName],
+        ? [...itemCollection]
+        : [...itemCollection, newCollectionName],
       price: !price ? edit.price : price,
       sold,
       images: userData.state.images,
     };
     console.log("info in Edit", info);
-    // db.collection("items")
-    //   .doc(edit.id)
-    //   .set(info)
-    //   .then((res) => {
-    //     console.log("Succesvol upload to database");
-    //     setMessage("Succesvol");
-    //     dispatch({ type: "check", payload: !userData.state.check });
-    //   })
-    //   .then(() => props.history.push("/home"));
+    db.collection("items")
+      .doc(edit.id)
+      .set(info)
+      .then((res) => {
+        console.log("Succesvol upload to database");
+        setMessage("Succesvol");
+        dispatch({ type: "check", payload: !userData.state.check });
+      })
+      .then(() => props.history.push("/home"));
   }
   return (
     <div className="input">
@@ -104,35 +113,40 @@ const Input = (props) => {
 
         <div className="form-group">
           <label for="exampleFormControlSelect1">Collectie</label>
-          {collection.map((option) => (
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                name={option}
-                id="defaultCheck1"
-                onChange={(e) => {
-                  console.log("e", e.target);
-                  const { name, checked } = e.target;
-                  console.log(checked);
-                  if (checked) {
-                    setItemCollections([...itemCollection, name]);
-                  } else {
-                    let removedArray = itemCollection;
-                    let removeableItem = removedArray.indexOf(name);
-                    let remove = removedArray.splice(removeableItem, 1);
-                    console.log("number", removeableItem);
-                    console.log("removed array", remove);
-                    console.log(removedArray);
-                    setItemCollections(removedArray);
-                  }
-                }}
-              />
-              <label class="form-check-label" for="defaultCheck1">
-                {option}
-              </label>
-            </div>
-          ))}
+          {collection.map((option, i) => {
+            return (
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name={option}
+                  defaultChecked={itemCollection.includes(option)}
+                  id={`defaultCheck${i}`}
+                  onChange={(e) => {
+                    console.log("e", e.target);
+                    const { name, checked } = e.target;
+                    console.log(checked);
+                    if (checked) {
+                      e.target.checked = true;
+                      setItemCollections([...itemCollection, name]);
+                    } else {
+                      e.target.checked = false;
+                      let removedArray = itemCollection;
+                      let removeableItem = removedArray.indexOf(name);
+                      let remove = removedArray.splice(removeableItem, 1);
+                      console.log("number", removeableItem);
+                      console.log("removed array", remove);
+                      console.log(removedArray);
+                      setItemCollections(removedArray);
+                    }
+                  }}
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  {option}
+                </label>
+              </div>
+            );
+          })}
           <div class="form-check">
             <input
               class="form-check-input"
