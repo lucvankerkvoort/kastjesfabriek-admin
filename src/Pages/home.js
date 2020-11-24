@@ -4,6 +4,7 @@ import Title from "../Components/Jumbotron/title";
 import Footer from "../Components/Footer/footer";
 import Collection from "../Components/Collections/collections";
 import Remove from "../Components/Modal/remove";
+import Inventory from "../Pages/inventory";
 import { store } from "../Services/Store";
 // import { db } from "../Firebase/Firebase";
 
@@ -51,6 +52,8 @@ const Home = (props) => {
             />
           );
         })}
+
+        <Inventory />
       </div>
       <Footer />
     </div>

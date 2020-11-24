@@ -6,7 +6,9 @@ import Input from "./Pages/input";
 import Collection from "./Pages/collection";
 import Remove from "./Components/Modal/remove";
 import Edit from "./Pages/edit";
-import Inventory from "./Pages/inventory";
+import Voorraad from "./Components/Voorraad/voorraad";
+import VerfKleur from "./Components/VerfKleur/verfkleur";
+import AddInventory from "./Pages/addInventory";
 // import Help from "./Pages/help";
 // import About from "./Pages/about";
 import SignInPage from "./Pages/login";
@@ -89,7 +91,12 @@ const App = () => {
           render={(props) => <Collection {...props} />}
         />
         <Route exact path="/" component={SignInPage} />
-        <Route path="/voorraad" render={(props) => <Inventory {...props} />} />
+        <Route
+          path="/add-inventory"
+          render={(props) => <AddInventory {...props} />}
+        />
+        <Route path="/voorraad" render={(props) => <Voorraad {...props} />} />
+        <Route path="/verfkleur" render={(props) => <VerfKleur {...props} />} />
         <Route path="/edit" render={(props) => <Edit {...props} />} />
         <Route path="/spec" render={(props) => <Specification {...props} />} />
         <Route path="/input" render={(props) => <Input {...props} />} />

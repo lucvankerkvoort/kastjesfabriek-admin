@@ -9,7 +9,7 @@ const Supply = ({ selected, title, picture, price, setSelected, id }) => {
       }}
     >
       <h1>{title}</h1>
-      <img src={picture} alt="..." />
+      <img src={picture} alt="..." height="100px" />
       <p>Price: ${price}</p>
     </button>
   );

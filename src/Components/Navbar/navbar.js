@@ -24,10 +24,10 @@ const Navbar = ({ loggedIn = false }) => {
             <SignOutButton />
           </Link>
           <Link
-            to="/voorraad"
+            to="/add-inventory"
             style={{ textDecoration: "none", color: "black" }}
           >
-            Voorraad
+            Voorraad Toevoegen
           </Link>
         </div>
       ) : null}
