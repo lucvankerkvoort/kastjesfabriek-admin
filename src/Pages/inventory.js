@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Images from "../Images/images";
 import Supply from "../Components/Supplies/supply";
 import Paints from "../Components/Paints/paints";
 import { db } from "../Firebase/Firebase";
@@ -27,70 +26,6 @@ const Inventory = () => {
       });
   }, []);
 
-  const fakeData = [
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-    {
-      title: "BlaBla",
-      price: "Blabla",
-      picture: Images.instagram,
-    },
-  ];
-
-  const fakeDataPaint = [
-    {
-      color: "Gray",
-      picture: Images.jumbotronBackground,
-    },
-    {
-      color: "Blue",
-      picture: Images.jumbotronBackground,
-    },
-    {
-      color: "Black",
-      picture: Images.jumbotronBackground,
-    },
-    {
-      color: "Green",
-      picture: Images.jumbotronBackground,
-    },
-    {
-      color: "White",
-      picture: Images.jumbotronBackground,
-    },
-    {
-      color: "Patrick",
-      picture: Images.jumbotronBackground,
-    },
-  ];
   return (
     <div className="inventory">
       {console.log("What up brother", dbFurniture)}
