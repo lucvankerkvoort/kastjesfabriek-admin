@@ -23,6 +23,12 @@ const Navbar = ({ loggedIn = false }) => {
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             <SignOutButton />
           </Link>
+          <Link
+            to="/voorraad"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            Voorraad
+          </Link>
         </div>
       ) : null}
     </div>
